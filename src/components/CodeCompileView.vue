@@ -1,10 +1,10 @@
 <template>
   <div class="compiler-container">
     <h1>Please enter your code:</h1>
-    <textarea v-model="code" id="code-input"></textarea>
-    <button id="compile-button" @click="dummyCompile">Compile</button>
+    <textarea v-model="codeRepresentation.code" id="code-input"></textarea>
+    <button id="compile-button" @click="compile">Compile</button>
     <h1>Output:</h1>
-    <p id="output">placeholder {{output}}</p>
+    <p id="output">{{output}}</p>
     <p>{{ this.code }}</p>
   </div>
 </template>
@@ -15,20 +15,21 @@ export default {
   name: 'CodeCompileView',
   data () {
     return {
-      code: '',
+      codeRepresentation: {
+        code: ''
+      },
       output: ''
     }
   },
   methods: {
     compile () {
-      console.log('Compiling')
-      // write code to file
-      // run container and pipe output to output-file
-      // take contents of output file and put in output
-      return 0
+      axios.post('http://localhost:8085/execute', this.codeRepresentation)
+        .then(response => {
+          this.output = response.data
+        })
     },
     dummyCompile () {
-      axios.get('http://localhost:8085/test/' + this.code)
+      axios.get('http://localhost:8085/test/' + this.codeRepresentation.code)
         .then(response => {
           this.output = response.data
         })
