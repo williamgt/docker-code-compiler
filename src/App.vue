@@ -1,15 +1,14 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <CodeCompileView></CodeCompileView>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CodeCompileView from '@/components/CodeCompileView'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    CodeCompileView
   }
 }
 </script>
